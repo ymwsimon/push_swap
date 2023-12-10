@@ -2,7 +2,7 @@ NAME = push_swap
 
 NAME_MAIN = push_swap
 
-SRCS = init_des push rank rotate small_solve solve swap utils
+SRCS = init_des push rank rotate small_solve solve chunk_solve swap utils
 
 OBJS = $(SRCS:=.o)
 
