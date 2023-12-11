@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/10 22:35:16 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/11 12:35:37 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int arc, char **arv)
 		ft_putstr_fd("Error\n", 2);
 		return (1);
 	}
-	if (arc - 1 >= 60)
+	if (arc - 1 > 30)
 		chunk_solve(&sts);
 	else
 		ft_small_solve(&sts);

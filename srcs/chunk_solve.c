@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/11 00:54:16 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/11 12:33:41 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ void	chunk_solve(t_stac *sts)
 	int	pos_of_top_rank;
 	int	top_rank;
 
+	if (ft_sorted(sts->na, sts->ra))
+		return ;
 	chunk_size = sts->na / (sts->n * 5 / 2);
+	if (!chunk_size)
+		chunk_size = 1;
 	move_up_to = chunk_size;
 	while (sts->na)
 	{
