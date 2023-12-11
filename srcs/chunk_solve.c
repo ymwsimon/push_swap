@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/10 22:49:52 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/11 00:54:16 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,19 @@ void	chunk_solve(t_stac *sts)
 	int	pos_of_top_rank;
 	int	top_rank;
 
-	chunk_size = sts->na / sts->n;
+	chunk_size = sts->na / (sts->n * 5 / 2);
 	move_up_to = chunk_size;
 	while (sts->na)
 	{
 		while (sts->na && get_min_rank(sts->ra, sts->na) < move_up_to)
 		{
-			if (sts->ra[0] < move_up_to)
+			if (sts->ra[0] < (move_up_to + chunk_size))
 				ft_push('b', 0, sts, "pb\n");
-			else
+			if (sts->nb && sts->rb[0] >= move_up_to && sts->na && sts->ra[0] >= (move_up_to + chunk_size))
+				ft_rr(sts, "rr\n");
+			else if (sts->nb && sts->rb[0] >= move_up_to)
+				ft_rotate(sts->nb, sts->sb, sts->rb, "rb\n");
+			else if (sts->na && sts->ra[0] >= (move_up_to + chunk_size))
 				ft_rotate(sts->na, sts->sa, sts->ra, "ra\n");
 		}
 		move_up_to += chunk_size;

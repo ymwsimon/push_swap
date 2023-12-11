@@ -249,7 +249,7 @@ def runn():
 				_rrr()
 			elif push_swap[index] == b'sa':
 				_sa()
-			elif push_swap[index] == 'sb':
+			elif push_swap[index] == b'sb':
 				_sb()
 			elif push_swap[index] == b'ss':
 				_ss()
