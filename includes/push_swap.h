@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:29 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/10 20:13:01 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/13 11:31:13 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ void	ft_ssolve_3step(t_stac *sts);
 
 void	ft_small_solve(t_stac *sts);
 
-void	chunk_solve(t_stac *sts);
+int		chunk_solve(t_stac *sts, int m, int print);
 
 #endif

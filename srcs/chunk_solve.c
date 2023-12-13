@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/11 12:33:41 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/13 12:04:47 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,57 @@ int	get_pos_of_rank(int *r, int n, int rank)
 	return (i);
 }
 
-void	chunk_solve(t_stac *sts)
+int	chunk_solve(t_stac *sts, int m, int print)
 {
 	int	chunk_size;
 	int	move_up_to;
 	int	pos_of_top_rank;
 	int	top_rank;
+	int	steps;
 
 	if (ft_sorted(sts->na, sts->ra))
-		return ;
-	chunk_size = sts->na / (sts->n * 5 / 2);
+		return (0);
+	chunk_size = sts->na / m;
 	if (!chunk_size)
 		chunk_size = 1;
 	move_up_to = chunk_size;
+	steps = 0;
 	while (sts->na)
 	{
 		while (sts->na && get_min_rank(sts->ra, sts->na) < move_up_to)
 		{
 			if (sts->ra[0] < (move_up_to + chunk_size))
-				ft_push('b', 0, sts, "pb\n");
+			{
+				if (print)
+					ft_push('b', 0, sts, "pb\n");
+				else
+					ft_push('b', 0, sts, "");
+				steps++;
+			}
 			if (sts->nb && sts->rb[0] >= move_up_to && sts->na && sts->ra[0] >= (move_up_to + chunk_size))
-				ft_rr(sts, "rr\n");
+			{
+				if (print)
+					ft_rr(sts, "rr\n");
+				else
+					ft_rr(sts, "");
+				steps++;
+			}
 			else if (sts->nb && sts->rb[0] >= move_up_to)
-				ft_rotate(sts->nb, sts->sb, sts->rb, "rb\n");
+			{
+				if (print)
+					ft_rotate(sts->nb, sts->sb, sts->rb, "rb\n");
+				else
+					ft_rotate(sts->nb, sts->sb, sts->rb, "");
+				steps++;
+			}
 			else if (sts->na && sts->ra[0] >= (move_up_to + chunk_size))
-				ft_rotate(sts->na, sts->sa, sts->ra, "ra\n");
+			{
+				if (print)
+					ft_rotate(sts->na, sts->sa, sts->ra, "ra\n");
+				else
+					ft_rotate(sts->na, sts->sa, sts->ra, "");
+				steps++;
+			}
 		}
 		move_up_to += chunk_size;
 	}
@@ -73,15 +99,32 @@ void	chunk_solve(t_stac *sts)
 		if (pos_of_top_rank < sts->nb / 2)
 		{
 			while (sts->nb && sts->rb[0] != top_rank)
-				ft_rotate(sts->nb, sts->sb, sts->rb, "rb\n");
+			{
+				if (print)
+					ft_rotate(sts->nb, sts->sb, sts->rb, "rb\n");
+				else
+					ft_rotate(sts->nb, sts->sb, sts->rb, "");
+				steps++;
+			}
 		}
 		else
 		{
 			while (sts->nb && sts->rb[0] != top_rank)
-				ft_rev_rotate(sts->nb, sts->sb, sts->rb, "rrb\n");
+			{
+				if (print)
+					ft_rev_rotate(sts->nb, sts->sb, sts->rb, "rrb\n");
+				else
+					ft_rev_rotate(sts->nb, sts->sb, sts->rb, "");
+				steps++;
+			}
 		}
-		ft_push('a', 0, sts, "pa\n");
+		if (print)
+			ft_push('a', 0, sts, "pa\n");
+		else
+			ft_push('a', 0, sts, "");
+		steps++;
 		top_rank--;
 		pos_of_top_rank = get_pos_of_rank(sts->rb, sts->nb, top_rank);
 	}
+	return (steps);
 }
