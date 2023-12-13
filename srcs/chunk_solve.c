@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_solve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/13 12:04:47 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/13 14:20:19 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,38 @@ int	chunk_solve(t_stac *sts, int m, int print)
 					ft_rotate(sts->nb, sts->sb, sts->rb, "");
 				steps++;
 			}
-			else if (sts->na && sts->ra[0] >= (move_up_to + chunk_size))
+			/*else if (sts->na && sts->ra[0] >= (move_up_to + chunk_size))
 			{
 				if (print)
 					ft_rotate(sts->na, sts->sa, sts->ra, "ra\n");
 				else
 					ft_rotate(sts->na, sts->sa, sts->ra, "");
 				steps++;
+			}*/
+			if (sts->na && get_min_rank(sts->ra, sts->na) < move_up_to + chunk_size)
+			{
+				if (pos_search_from_head(sts->ra, sts->na, move_up_to + chunk_size) <= sts->na - pos_search_from_end(sts->ra, sts->na, move_up_to + chunk_size))
+				{
+					while (sts->ra[0] >= move_up_to + chunk_size)
+					{
+						if (print)
+							ft_rotate(sts->na, sts->sa, sts->ra, "ra\n");
+						else
+							ft_rotate(sts->na, sts->sa, sts->ra, "");
+						steps++;
+					}
+				}
+				else
+				{
+					while (sts->ra[0] >= move_up_to + chunk_size)
+					{
+						if (print)
+							ft_rev_rotate(sts->na, sts->sa, sts->ra, "rra\n");
+						else
+							ft_rev_rotate(sts->na, sts->sa, sts->ra, "");
+						steps++;
+					}
+				}
 			}
 		}
 		move_up_to += chunk_size;
