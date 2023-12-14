@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 20:55:14 by mayeung           #+#    #+#             */
-/*   Updated: 2023/07/30 20:55:15 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/10/16 17:08:24 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_putnbr_fd(int n, int fd)
 		write(fd, "-", 1);
 		sign = -1;
 	}
-	while (t > 9 || t < -9)
+	while (t / 10)
 	{
 		ten *= 10;
 		t /= 10;

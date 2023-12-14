@@ -6,13 +6,13 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 20:58:18 by mayeung           #+#    #+#             */
-/*   Updated: 2023/07/30 20:58:19 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/10/16 17:53:30 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_min(size_t a, size_t b)
+static size_t	ft_min(size_t a, size_t b)
 {
 	if (a > b)
 		return (b);

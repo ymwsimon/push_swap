@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 20:56:20 by mayeung           #+#    #+#             */
-/*   Updated: 2023/07/30 20:56:21 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/10/16 17:19:54 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	while (i < size && dst[i])
 		i++;
 	j = 0;
-	while (size && (i + j) < (size - 1) && src[j])
+	while (i + j + 1 < size && src[j])
 	{
 		dst[i + j] = src[j];
 		j++;
 	}
-	if ((i + j) < size)
+	if (i + j < size)
 		dst[i + j] = 0;
 	while (src[j])
 		j++;

@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 20:56:17 by mayeung           #+#    #+#             */
-/*   Updated: 2023/10/07 01:12:55 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/10/16 15:31:25 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,17 @@
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*res;
+	int		i;
 
-	res = 0;
-	if (!s1)
-		return (ft_strdup(s2));
-	if (!s2)
-		return (ft_strdup(s1));
-	res = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (res)
 	{
-		res[0] = 0;
-		ft_strlcat(res, s1, ft_strlen(s1) + 1);
-		ft_strlcat(res, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+		i = 0;
+		while (s1 && *s1)
+			res[i++] = *s1++;
+		while (s2 && *s2)
+			res[i++] = *s2++;
+		res[i] = 0;
 	}
 	return (res);
 }

@@ -6,19 +6,19 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 20:53:44 by mayeung           #+#    #+#             */
-/*   Updated: 2023/07/30 20:53:45 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/10/16 16:53:37 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_int_length(int n)
+static size_t	ft_int_length(int n)
 {
 	size_t	i;
 
-	i = 2;
+	i = 1;
 	if (n < 0)
-		i = 3;
+		i = 2;
 	while (n / 10)
 	{
 		n /= 10;
@@ -34,10 +34,10 @@ char	*ft_itoa(int n)
 	char	*res;
 
 	i = ft_int_length(n);
-	res = malloc(sizeof(char) * i);
+	res = malloc(sizeof(char) * (i + 1));
 	if (!res)
 		return (res);
-	res[i - 1] = 0;
+	res[i] = 0;
 	sign = 1;
 	if (n < 0)
 	{
@@ -45,10 +45,10 @@ char	*ft_itoa(int n)
 		res[0] = '-';
 	}
 	if (!n)
-		ft_strlcpy(res, "0", 2);
+		res[0] = '0';
 	while (n)
 	{
-		res[i - 2] = (n % 10) * sign + '0';
+		res[i - 1] = (n % 10) * sign + '0';
 		n /= 10;
 		i--;
 	}
