@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/14 14:50:36 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/14 16:12:15 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main(int arc, char **arv)
 				min_steps = steps;
 				min_i = i;
 			}
+			ft_destroy(&sts_cpy);
 			//printf("m = %d, steps = %d\n", i, steps);
 			i++;
 		}
