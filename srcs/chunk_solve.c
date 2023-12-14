@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/13 14:20:19 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/14 14:48:52 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,34 @@ int	get_pos_of_rank(int *r, int n, int rank)
 	while (i < n && r[i] != rank)
 		i++;
 	return (i);
+}
+
+int	pos_search_from_head(int *r, int n, int rank)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (r[i] < rank)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int	pos_search_from_end(int *r, int n, int rank)
+{
+	int	i;
+
+	i = n - 1;
+	while (i >= 0)
+	{
+		if (r[i] < rank)
+			return (i);
+		i--;
+	}
+	return (-1);
 }
 
 int	chunk_solve(t_stac *sts, int m, int print)
@@ -74,46 +102,9 @@ int	chunk_solve(t_stac *sts, int m, int print)
 				steps++;
 			}
 			else if (sts->nb && sts->rb[0] >= move_up_to)
-			{
-				if (print)
-					ft_rotate(sts->nb, sts->sb, sts->rb, "rb\n");
-				else
-					ft_rotate(sts->nb, sts->sb, sts->rb, "");
-				steps++;
-			}
-			/*else if (sts->na && sts->ra[0] >= (move_up_to + chunk_size))
-			{
-				if (print)
-					ft_rotate(sts->na, sts->sa, sts->ra, "ra\n");
-				else
-					ft_rotate(sts->na, sts->sa, sts->ra, "");
-				steps++;
-			}*/
-			if (sts->na && get_min_rank(sts->ra, sts->na) < move_up_to + chunk_size)
-			{
-				if (pos_search_from_head(sts->ra, sts->na, move_up_to + chunk_size) <= sts->na - pos_search_from_end(sts->ra, sts->na, move_up_to + chunk_size))
-				{
-					while (sts->ra[0] >= move_up_to + chunk_size)
-					{
-						if (print)
-							ft_rotate(sts->na, sts->sa, sts->ra, "ra\n");
-						else
-							ft_rotate(sts->na, sts->sa, sts->ra, "");
-						steps++;
-					}
-				}
-				else
-				{
-					while (sts->ra[0] >= move_up_to + chunk_size)
-					{
-						if (print)
-							ft_rev_rotate(sts->na, sts->sa, sts->ra, "rra\n");
-						else
-							ft_rev_rotate(sts->na, sts->sa, sts->ra, "");
-						steps++;
-					}
-				}
-			}
+				ft_rotate(sts->nb, sts->sb, sts->rb, "rb\n");
+			else if (sts->na && sts->ra[0] >= (move_up_to + chunk_size))
+				ft_rotate(sts->na, sts->sa, sts->ra, "ra\n");
 		}
 		move_up_to += chunk_size;
 	}
