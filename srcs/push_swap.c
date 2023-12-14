@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/13 12:33:52 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/14 14:50:36 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int	main(int arc, char **arv)
 			//printf("m = %d, steps = %d\n", i, steps);
 			i++;
 		}
-		printf("===m: %d steps: %d\n", min_i, min_steps);
+		chunk_solve(&sts, min_i, 1);
+		//printf("===m: %d steps: %d\n", min_i, min_steps);
 	}
 	else
 		ft_small_solve(&sts);

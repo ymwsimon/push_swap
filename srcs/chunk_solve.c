@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/14 14:48:52 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/14 16:06:45 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,24 @@ int	chunk_solve(t_stac *sts, int m, int print)
 		{
 			if (sts->ra[0] < (move_up_to + chunk_size))
 			{
-				if (print)
-					ft_push('b', 0, sts, "pb\n");
-				else
-					ft_push('b', 0, sts, "");
+				ft_push(0, sts, print, "pb\n");
 				steps++;
 			}
 			if (sts->nb && sts->rb[0] >= move_up_to && sts->na && sts->ra[0] >= (move_up_to + chunk_size))
 			{
-				if (print)
-					ft_rr(sts, "rr\n");
-				else
-					ft_rr(sts, "");
+				ft_rr(sts, print, "rr\n");
 				steps++;
 			}
 			else if (sts->nb && sts->rb[0] >= move_up_to)
-				ft_rotate(sts->nb, sts->sb, sts->rb, "rb\n");
+			{
+				ft_rotate(sts, -1, print, "rb\n");
+				steps++;
+			}
 			else if (sts->na && sts->ra[0] >= (move_up_to + chunk_size))
-				ft_rotate(sts->na, sts->sa, sts->ra, "ra\n");
+			{
+				ft_rotate(sts, -1, print, "ra\n");
+				steps++;
+			}
 		}
 		move_up_to += chunk_size;
 	}
@@ -116,10 +116,7 @@ int	chunk_solve(t_stac *sts, int m, int print)
 		{
 			while (sts->nb && sts->rb[0] != top_rank)
 			{
-				if (print)
-					ft_rotate(sts->nb, sts->sb, sts->rb, "rb\n");
-				else
-					ft_rotate(sts->nb, sts->sb, sts->rb, "");
+				ft_rotate(sts, -1, print, "rb\n");
 				steps++;
 			}
 		}
@@ -127,17 +124,11 @@ int	chunk_solve(t_stac *sts, int m, int print)
 		{
 			while (sts->nb && sts->rb[0] != top_rank)
 			{
-				if (print)
-					ft_rev_rotate(sts->nb, sts->sb, sts->rb, "rrb\n");
-				else
-					ft_rev_rotate(sts->nb, sts->sb, sts->rb, "");
+				ft_rev_rotate(sts, sts->nb, print, "rrb\n");
 				steps++;
 			}
 		}
-		if (print)
-			ft_push('a', 0, sts, "pa\n");
-		else
-			ft_push('a', 0, sts, "");
+		ft_push(0, sts, print, "pa\n");
 		steps++;
 		top_rank--;
 		pos_of_top_rank = get_pos_of_rank(sts->rb, sts->nb, top_rank);

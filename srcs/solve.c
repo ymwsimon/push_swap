@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:58:20 by mayeung           #+#    #+#             */
-/*   Updated: 2023/10/07 14:02:39 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/14 15:54:01 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ void	ft_proc_st(int digit, int times, char from, t_stac *sts)
 	while (i < times)
 	{
 		if (from == 'a' && !(sts->ra[0] & digit))
-			ft_rotate(sts->na, sts->sa, sts->ra, "ra\n");
+			ft_rotate(sts, -1, 1, "ra\n");
 		else if (from == 'a' && (sts->ra[0] & digit))
 		{
-			ft_push('b', 0, sts, "pb\n");
+			ft_push(0, sts, 1, "pb\n");
 			if (digit != 1)
-				ft_rotate(sts->nb, sts->sb, sts->rb, "rb\n");
+				ft_rotate(sts, -1, 1, "rb\n");
 		}
 		else if (from == 'b' && (sts->rb[0] & digit))
-			ft_rotate(sts->nb, sts->sb, sts->rb, "rb\n");
+			ft_rotate(sts, -1, 1, "rb\n");
 		else if (from == 'b' && !(sts->rb[0] & digit))
 		{
-			ft_push('a', 0, sts, "pa\n");
-			ft_rotate(sts->na, sts->sa, sts->ra, "ra\n");
+			ft_push(0, sts, 1, "pa\n");
+			ft_rotate(sts, -1, 1, "ra\n");
 		}
 		i++;
 	}

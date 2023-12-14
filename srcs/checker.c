@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:42:28 by mayeung           #+#    #+#             */
-/*   Updated: 2023/10/07 17:20:23 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/14 16:00:43 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,27 +48,27 @@ int	ft_valid_cmd(char *cmd)
 void	ft_exe_cmd(char *cmd, t_stac *sts)
 {
 	if (!ft_strncmp(cmd, "pa", 3))
-		ft_push('a', 0, sts, 0);
+		ft_push(0, sts, 0, "pa\n");
 	else if (!ft_strncmp(cmd, "pb", 3))
-		ft_push('b', 0, sts, 0);
+		ft_push(0, sts, 0, "pb\n");
 	else if (!ft_strncmp(cmd, "sa", 3))
-		ft_swap(sts->na, sts->sa, sts->ra, 0);
+		ft_swap(sts, 0, "sa\n");
 	else if (!ft_strncmp(cmd, "sb", 3))
-		ft_swap(sts->nb, sts->sb, sts->rb, 0);
+		ft_swap(sts, 0, "sb\n");
 	else if (!ft_strncmp(cmd, "ss", 3))
-		ft_ss(sts, 0);
+		ft_ss(sts, 0, "ss\n");
 	else if (!ft_strncmp(cmd, "ra", 3))
-		ft_rotate(sts->na, sts->sa, sts->ra, 0);
+		ft_rotate(sts, -1, 0, "ra\n");
 	else if (!ft_strncmp(cmd, "rb", 3))
-		ft_rotate(sts->nb, sts->sb, sts->rb, 0);
+		ft_rotate(sts, -1, 0, "rb\n");
 	else if (!ft_strncmp(cmd, "rr", 3))
-		ft_rr(sts, 0);
+		ft_rr(sts, 0, "rr\n");
 	else if (!ft_strncmp(cmd, "rrr", 4))
-		ft_rrr(sts, 0);
+		ft_rrr(sts, 0, "rrr\n");
 	else if (!ft_strncmp(cmd, "rra", 4))
-		ft_rev_rotate(sts->na, sts->sa, sts->ra, 0);
+		ft_rev_rotate(sts, sts->na, 0, "rra\n");
 	else if (!ft_strncmp(cmd, "rrb", 4))
-		ft_rev_rotate(sts->nb, sts->sb, sts->rb, 0);
+		ft_rev_rotate(sts, sts->nb, 0, "rrb\n");
 }
 
 void	ft_proc(t_stac *sts)

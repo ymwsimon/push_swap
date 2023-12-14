@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:29 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/13 11:31:13 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/14 15:40:07 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,23 @@ void	ft_get_rankab(t_stac *sts);
 
 int		ft_sorted(int n, int *rank);
 
-void	ft_swap(int n, int *st, int *rank, char *op);
+void	ft_swap(t_stac *sts, int print, char *op);
 
-void	ft_ss(t_stac *sts, char *op);
+void	ft_ss(t_stac *sts, int print, char *op);
 
-void	ft_rotate(int n, int *st, int *rank, char *op);
+void	ft_rotate(t_stac *sts, int i, int print, char *op);
 
-void	ft_rr(t_stac *sts, char *op);
+void	ft_rr(t_stac *sts, int print, char *op);
 
-void	ft_rev_rotate(int n, int *st, int *rank, char *op);
+void	ft_rev_rotate(t_stac *sts, int i, int print, char *op);
 
-void	ft_rrr(t_stac *sts, char *op);
+void	ft_rrr(t_stac *sts, int print, char *op);
 
 void	ft_shift_down(int *st, int *rst, int *nst);
 
 void	ft_shift_up(int *st, int *rst, int *nst);
 
-void	ft_push(char c, int getrank, t_stac *sts, char *op);
+void	ft_push(int getrank, t_stac *sts, int print, char *op);
 
 void	ft_proc_st(int digit, int times, char from, t_stac *sts);
 
