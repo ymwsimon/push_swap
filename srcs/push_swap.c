@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/14 16:19:07 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/15 18:14:11 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,43 @@ t_stac	cpy_stack(t_stac sts)
 	return (res);
 }
 
-int	search_chuck_size(t_stac sts)
+void	search_chuck_size(t_stac sts, int *m, int *n)
 {
 	t_stac	sts_cpy;
 	int		i;
+	int		j;
 	int		steps;
-	int		min_i;
 	int		min_steps;
 
-	i = sts.n - 2;
-	min_i = i;
+	i = sts.n - 4;
 	min_steps = INT_MAX;
-	while (i <= sts.n * 4)
+	while (i <= sts.n * 40)
 	{
-		sts_cpy = cpy_stack(sts);
-		steps = chunk_solve(&sts_cpy, i, 0);
-		if (steps < min_steps)
+		j = 1;
+		while (j <= 101)
 		{
-			min_steps = steps;
-			min_i = i;
+			sts_cpy = cpy_stack(sts);
+			steps = chunk_solve(&sts_cpy, i, j, 0);
+			if (steps < min_steps)
+			{
+				min_steps = steps;
+				*m = i;
+				*n = j;
+			}
+			ft_destroy(&sts_cpy);
+			if ((steps - min_steps) * 100 / min_steps > 20)
+				break ;
+			j++;
 		}
-		ft_destroy(&sts_cpy);
 		i++;
 	}
-	return (min_i);
 }
 
 int	main(int arc, char **arv)
 {
 	t_stac	sts;
+	int		min_m;
+	int		min_n;
 
 	if (arc == 1)
 		return (0);
@@ -75,7 +83,10 @@ int	main(int arc, char **arv)
 		return (1);
 	}
 	if (arc - 1 > 30)
-		chunk_solve(&sts, search_chuck_size(sts), 1);
+	{	
+		search_chuck_size(sts, &min_m, &min_n);
+		chunk_solve(&sts, min_m, min_n, 1);
+	}
 	else
 		ft_small_solve(&sts);
 	ft_destroy(&sts);
