@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_solve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/15 18:44:45 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/16 14:25:02 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	get_pos_of_rank(int *r, int n, int rank)
 		i++;
 	return (i);
 }
-
 
 int	last_index_from_head(t_stac *sts, int rank)
 {
@@ -71,32 +70,32 @@ int	last_index_from_end(t_stac *sts, int rank)
 	return (res);
 }
 
-int	move_from_a2b_group(t_stac *sts, int m, int n, int steps, int print)
+int	move_from_a2b_group(t_stac *sts, double m, int steps, int print)
 {
 	int	chunk_size;
 	int	move_up_to;
 
-	chunk_size = sts->na * n / m;
+	chunk_size = sts->na * 1.0 / m;
 	if (!chunk_size)
 		chunk_size = 1;
 	move_up_to = chunk_size;
 	while (sts->na)
 	{
-		if (last_index_from_head(sts, move_up_to) < sts->na - last_index_from_end(sts, move_up_to))
+		//if (last_index_from_head(sts, move_up_to) < sts->na - last_index_from_end(sts, move_up_to))
+		//{
+		while (sts->na && get_min_rank(sts->ra, sts->na) < move_up_to)
 		{
-			while (sts->na && get_min_rank(sts->ra, sts->na) < move_up_to)
-			{
-				if (sts->na && sts->ra[0] < (move_up_to + chunk_size))
-					ft_push(0, sts, print * ++steps, "pb\n");
-				if (sts->nb && sts->rb[0] >= move_up_to && sts->na
-					&& sts->ra[0] >= (move_up_to + chunk_size))
-					ft_rr(sts, print * ++steps, "rr\n");
-				else if (sts->nb && sts->rb[0] >= move_up_to)
-					ft_rotate(sts, -1, print * ++steps, "rb\n");
-				else if (sts->na && sts->ra[0] >= (move_up_to + chunk_size))
-					ft_rotate(sts, -1, print * ++steps, "ra\n");
-			}
+			if (sts->na && sts->ra[0] < (move_up_to + chunk_size))
+				ft_push(0, sts, print * ++steps, "pb\n");
+			if (sts->nb && sts->rb[0] >= move_up_to && sts->na
+				&& sts->ra[0] >= (move_up_to + chunk_size))
+				ft_rr(sts, print * ++steps, "rr\n");
+			else if (sts->nb && sts->rb[0] >= move_up_to)
+				ft_rotate(sts, -1, print * ++steps, "rb\n");
+			else if (sts->na && sts->ra[0] >= (move_up_to + chunk_size))
+				ft_rotate(sts, -1, print * ++steps, "ra\n");
 		}
+		/*}
 		else
 		{
 			while (sts->na && get_min_rank(sts->ra, sts->na) < move_up_to)
@@ -111,7 +110,7 @@ int	move_from_a2b_group(t_stac *sts, int m, int n, int steps, int print)
 				else if (sts->na && sts->ra[0] >= (move_up_to + chunk_size))
 					ft_rev_rotate(sts, sts->na, print * ++steps, "rra\n");
 			}
-		}
+		}*/
 		move_up_to += chunk_size;
 	}
 	return (steps);
@@ -139,13 +138,13 @@ int	move_from_b2a(t_stac *sts, int steps, int print)
 	return (steps);
 }
 
-int	chunk_solve(t_stac *sts, int m, int n, int print)
+int	chunk_solve(t_stac *sts, double m, int print)
 {
 	int	steps;
 
 	if (ft_sorted(sts->na, sts->ra))
 		return (0);
-	steps = move_from_a2b_group(sts, m, n, 0, print);
+	steps = move_from_a2b_group(sts, m, 0, print);
 	steps += move_from_b2a(sts, 0, print);
 	return (steps);
 }

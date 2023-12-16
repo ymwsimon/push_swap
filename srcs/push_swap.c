@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/15 18:14:11 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/16 14:43:14 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,43 +36,33 @@ t_stac	cpy_stack(t_stac sts)
 	return (res);
 }
 
-void	search_chuck_size(t_stac sts, int *m, int *n)
+void	search_chuck_size(t_stac sts, double *m)
 {
-	t_stac	sts_cpy;
-	int		i;
-	int		j;
-	int		steps;
-	int		min_steps;
+	t_stac		sts_cpy;
+	double		i;
+	int			steps;
+	int			min_steps;
 
-	i = sts.n - 4;
+	i = sts.n;
 	min_steps = INT_MAX;
-	while (i <= sts.n * 40)
+	while (i <= sts.n * 4.0)
 	{
-		j = 1;
-		while (j <= 101)
+		sts_cpy = cpy_stack(sts);
+		steps = chunk_solve(&sts_cpy, i, 0);
+		if (steps < min_steps)
 		{
-			sts_cpy = cpy_stack(sts);
-			steps = chunk_solve(&sts_cpy, i, j, 0);
-			if (steps < min_steps)
-			{
-				min_steps = steps;
-				*m = i;
-				*n = j;
-			}
-			ft_destroy(&sts_cpy);
-			if ((steps - min_steps) * 100 / min_steps > 20)
-				break ;
-			j++;
+			min_steps = steps;
+			*m = i;
 		}
-		i++;
+		ft_destroy(&sts_cpy);
+		i += 0.07;
 	}
 }
 
 int	main(int arc, char **arv)
 {
 	t_stac	sts;
-	int		min_m;
-	int		min_n;
+	double	m;
 
 	if (arc == 1)
 		return (0);
@@ -84,8 +74,9 @@ int	main(int arc, char **arv)
 	}
 	if (arc - 1 > 30)
 	{	
-		search_chuck_size(sts, &min_m, &min_n);
-		chunk_solve(&sts, min_m, min_n, 1);
+		search_chuck_size(sts, &m);
+		printf("\n m:%f steps:%d\n", m, chunk_solve(&sts, m, 0));
+		//chunk_solve(&sts, m, 0);
 	}
 	else
 		ft_small_solve(&sts);

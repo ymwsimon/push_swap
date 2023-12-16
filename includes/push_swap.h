@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:29 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/15 17:54:30 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/16 14:20:23 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ void	ft_ssolve_3step(t_stac *sts);
 
 void	ft_small_solve(t_stac *sts);
 
-int		chunk_solve(t_stac *sts, int m, int n, int print);
+int		chunk_solve(t_stac *sts, double m, int print);
 
 #endif
