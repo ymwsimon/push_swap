@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/18 12:13:16 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/18 12:43:38 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	get_pos_of_rank(int *r, int n, int rank)
 	i = 0;
 	while (i < n && r[i] != rank)
 		i++;
+	if (i == n)
+		return (-1);
 	return (i);
 }
 
@@ -118,26 +120,122 @@ int	move_from_a2b_group(t_stac *sts, double m, int steps, int print)
 
 int	move_from_b2a(t_stac *sts, int steps, int print)
 {
-	int	pos_of_top_rank;
-	int	top_rank;
+	int	lower_rank;
+	int	upper_rank;
+	int flag;
 
-	top_rank = sts->nb - 1;
-	pos_of_top_rank = get_pos_of_rank(sts->rb, sts->nb, top_rank);
+	upper_rank = sts->nb - 1;
+	lower_rank = upper_rank;
 	while (sts->nb)
 	{
-		if (pos_of_top_rank < sts->nb / 2)
-			while (sts->nb && sts->rb[0] != top_rank)
+		flag = 0;
+		if (lower_rank >= upper_rank || sts->rb[0] == lower_rank || sts->rb[0] == upper_rank)
+		{
+			ft_push(0, sts, print * ++steps, "pa\n");
+			if (sts->ra[0] != upper_rank)
+				lower_rank = sts->ra[0] + 1;
+			else
+				upper_rank--;
+			if (upper_rank < lower_rank)
+			{
+				if (sts->na && get_pos_of_rank(sts->ra, sts->na, get_min_rank(sts->ra, sts->na)) < sts->na / 2)
+					while (sts->na && sts->ra[0] != upper_rank)
+						ft_rotate(sts, -1, print * ++steps, "ra\n");
+				else
+					while (sts->na && get_min_rank(sts->ra, sts->na) != sts->ra[0])
+						ft_rev_rotate(sts, sts->na, print * ++steps, "rra\n");
+				upper_rank = get_min_rank(sts->ra, sts->na);
+			}
+			flag = 1;
+		}
+
+		if (sts->na && sts->ra[0] == lower_rank - 1 && sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) < sts->nb / 2)
+			{ft_rr(sts, print * ++steps, "rr\n"); flag = 1;}
+		else if (sts->na && sts->ra[0] == lower_rank - 1)
+			{ft_rotate(sts, -1, print * ++steps, "ra\n"); flag = 1;}
+		if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) != -1 && get_pos_of_rank(sts->rb, sts->nb, upper_rank) < sts->nb / 2)
+			{ft_rotate(sts, -1, print * ++steps, "rb\n"); flag = 1;}
+		else if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) > sts->nb / 2)
+			{ft_rev_rotate(sts, sts->nb, print * ++steps, "rrb\n"); flag = 1;}
+		if (!flag)
+			return 0;
+		/*
+		if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) < sts->nb && sts->na && sts->ra[0] == lower_rank && lower_rank < upper_rank)
+			ft_rr(sts, print * ++steps, "rr\n");
+		else if (sts->na > 1 && sts->ra[0] == lower_rank)
+			ft_rotate(sts, -1, print * ++steps, "ra\n");
+		else if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) != -1 && get_pos_of_rank(sts->rb, sts->nb, upper_rank) < sts->nb / 2)
+			ft_rotate(sts, -1, print * ++steps, "rb\n");
+		else if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) > sts->nb / 2)
+			ft_rev_rotate(sts, sts->nb, print * ++steps, "rrb\n");
+		else if (sts->na > 1 && get_min_rank(sts->ra, sts->na) != sts->ra[0])
+		{
+			ft_rotate(sts, -1, print * ++steps, "ra\n");
+			upper_rank = get_min_rank(sts->ra, sts->na);
+			lower_rank = upper_rank + 1;
+		}*/
+		/*
+		if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) < sts->nb && sts->na && sts->ra[0] == lower_rank && lower_rank < upper_rank)
+			ft_rr(sts, print * ++steps, "rr\n");
+		else if (sts->na && sts->ra[0] == lower_rank)
+			ft_rotate(sts, -1, print * ++steps, "ra\n");
+		else if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) != -1 && get_pos_of_rank(sts->rb, sts->nb, upper_rank) < sts->nb)
+			ft_rotate(sts, -1, print * ++steps, "rb\n");
+		else if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) > sts->nb)
+			ft_rev_rotate(sts, sts->nb, print * ++steps, "rrb\n");
+		else if (sts->na && get_min_rank(sts->ra, sts->na) != sts->ra[0])
+		{
+			ft_rotate(sts, -1, print * ++steps, "ra\n");
+			upper_rank = sts->ra[0];
+			lower_rank = upper_rank + 1;
+		}
+		*/
+		/*
+				if (lower_rank > upper_rank || sts->rb[0] == lower_rank + 1 || sts->rb[0] == upper_rank)
+		{
+			ft_push(0, sts, print * ++steps, "pa\n");
+			if (sts->ra[0] != upper_rank)
+				lower_rank = sts->ra[0];
+			else
+				upper_rank--;
+		}
+		if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) != -1 && get_pos_of_rank(sts->rb, sts->nb, upper_rank) < sts->nb
+			&& sts->ra[0] == lower_rank && lower_rank + 1 < upper_rank)
+			ft_rr(sts, print * ++steps, "rr\n");
+		else if (lower_rank + 1 == upper_rank)
+		{
+			while (sts->na && sts->ra[0] != get_min_rank(sts->ra, sts->na))
+				ft_rev_rotate(sts, sts->na, print * ++steps, "rra\n");
+			if (sts->na)
+				upper_rank = get_min_rank(sts->ra, sts->na) - 1;
+		}
+		else if (sts->na && sts->ra[0] == lower_rank)
+			ft_rotate(sts, -1, print * ++steps, "ra\n");
+		else if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) != -1 && get_pos_of_rank(sts->rb, sts->nb, upper_rank) < sts->nb / 2)
+		{
+			while (sts->rb[0] != upper_rank)
 				ft_rotate(sts, -1, print * ++steps, "rb\n");
-		else
-			while (sts->nb && sts->rb[0] != top_rank)
-				ft_rev_rotate(sts, sts->nb, print * ++steps, "rrb\n");
-		ft_push(0, sts, print, "pa\n");
-		steps++;
-		pos_of_top_rank = get_pos_of_rank(sts->rb, sts->nb, --top_rank);
+		}
+		else if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) != -1 && get_pos_of_rank(sts->rb, sts->nb, upper_rank) > sts->nb / 2)
+		{
+			while (sts->rb[0] != upper_rank)
+				ft_rev_rotate(sts, sts->nb, print * ++steps, "rrb\n"); 
+		}
+		*/
 	}
 	return (steps);
 }
-
+		/*
+		if (pos_of_upper_rank < sts->nb / 2)
+			while (sts->nb && sts->rb[0] != upper_rank)
+				ft_rotate(sts, -1, print * ++steps, "rb\n");
+		else
+			while (sts->nb && sts->rb[0] != upper_rank)
+				ft_rev_rotate(sts, sts->nb, print * ++steps, "rrb\n");
+		ft_push(0, sts, print, "pa\n");
+		steps++;
+		pos_of_upper_rank = get_pos_of_rank(sts->rb, sts->nb, --upper_rank);
+		*/
 int	chunk_solve(t_stac *sts, double m, int print)
 {
 	int	steps;
