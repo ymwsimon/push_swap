@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   chunk_solve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/18 12:43:38 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/19 19:15:15 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int	get_min_rank(int *r, int n)
+int	min_r(int *r, int n)
 {
 	int	i;
 	int	res;
 
+	if (!n || !r)
+		return (-1);
 	res = r[0];
 	i = 1;
-	while (i < n)
+	while (r && i < n)
 	{
 		if (r[i] < res)
 			res = r[i];
@@ -28,12 +30,28 @@ int	get_min_rank(int *r, int n)
 	return (res);
 }
 
-int	get_pos_of_rank(int *r, int n, int rank)
+int max_r(int *r, int n)
+{
+	int	i;
+	int	res;
+
+	res = r[0];
+	i = 1;
+	while (r && i < n)
+	{
+		if (r[i] > res)
+			res = r[i];
+		i++;
+	}
+	return (res);
+}
+
+int	pos_r(int *r, int n, int rank)
 {
 	int	i;
 
 	i = 0;
-	while (i < n && r[i] != rank)
+	while (i < n && r && r[i] != rank)
 		i++;
 	if (i == n)
 		return (-1);
@@ -85,7 +103,7 @@ int	move_from_a2b_group(t_stac *sts, double m, int steps, int print)
 	{
 		//if (last_index_from_head(sts, move_up_to) < sts->na - last_index_from_end(sts, move_up_to))
 		//{
-		while (sts->na && get_min_rank(sts->ra, sts->na) < move_up_to)
+		while (sts->na && min_r(sts->ra, sts->na) < move_up_to)
 		{
 			if (sts->na && sts->ra[0] < (move_up_to + chunk_size))
 				ft_push(0, sts, print * ++steps, "pb\n");
@@ -120,15 +138,53 @@ int	move_from_a2b_group(t_stac *sts, double m, int steps, int print)
 
 int	move_from_b2a(t_stac *sts, int steps, int print)
 {
-	int	lower_rank;
-	int	upper_rank;
+	int	lrank;
+	int	urank;
 	int flag;
 
-	upper_rank = sts->nb - 1;
-	lower_rank = upper_rank;
+	urank = sts->nb - 1;
+	lrank = sts->nb;
 	while (sts->nb)
 	{
 		flag = 0;
+		if (((lrank > urank && ((sts->na > 1 && sts->ra[0] != min_r(sts->ra, sts->na) && pos_r(sts->ra, sts->na, min_r(sts->ra, sts->na)) <= sts->na / 2)))
+			|| (lrank <= urank && sts->na > 1 && sts->ra[0] == lrank - 1))
+			&& sts->nb > 1 && sts->rb[0] != max_r(sts->rb, sts->nb) && pos_r(sts->rb, sts->nb, max_r(sts->rb, sts->nb)) <= sts->nb / 2)
+			{ft_rr(sts, print * ++steps, "rr\n"); flag = 1;}
+		//else if (lrank > urank && sts->na > 1 && sts->ra[0] != min_r(sts->ra, sts->na) && pos_r(sts->ra, sts->na, min_r(sts->ra, sts->na)) > sts->na / 2
+		//	&& sts->nb > 1 && sts->rb[0] != max_r(sts->rb, sts->nb) && pos_r(sts->rb, sts->nb, max_r(sts->rb, sts->nb)) > sts->nb / 2)
+		//	{ft_rrr(sts, print * ++steps, "rrr\n"); flag = 1;}
+		else if ((lrank > urank && sts->na > 1 && sts->ra[0] != min_r(sts->ra, sts->na) && pos_r(sts->ra, sts->na, min_r(sts->ra, sts->na)) <= sts->na / 2)
+			|| (lrank <= urank && sts->na > 1 && sts->ra[0] == lrank - 1))
+			{ft_rotate(sts, -1, print * ++steps, "ra\n"); flag = 1;}
+		else if (sts->nb > 1 && sts->rb[0] != max_r(sts->rb, sts->nb) && pos_r(sts->rb, sts->nb, max_r(sts->rb, sts->nb)) <= sts->nb / 2)
+			{ft_rotate(sts, -1, print * ++steps, "rb\n"); flag = 1;}
+		else if (lrank > urank && sts->na > 1 && sts->ra[0] != min_r(sts->ra, sts->na) && pos_r(sts->ra, sts->na, min_r(sts->ra, sts->na)) > sts->na / 2)
+			{ft_rev_rotate(sts, sts->na, print * ++steps, "rra\n"); flag = 1;}
+		else if (sts->nb > 1 && sts->rb[0] != max_r(sts->rb, sts->nb) && pos_r(sts->rb, sts->nb, max_r(sts->rb, sts->nb)) > sts->nb / 2)
+			{ft_rev_rotate(sts, sts->nb, print * ++steps, "rrb\n"); flag = 1;}
+		if ((lrank > urank && (!sts->na || sts->ra[0] == min_r(sts->ra, sts->na))) || (lrank <= urank && (lrank == sts->rb[0] || urank == sts->rb[0])))
+		{
+			flag = 1;
+			ft_push(0, sts, print * ++steps, "pa\n");
+			if (sts->ra[0] == lrank)
+				lrank++;
+			else if (sts->ra[0] != urank)
+				lrank = sts->ra[0] + 1;
+			urank = max_r(sts->rb, sts->nb);
+		}
+		if (!flag)
+			return 0;
+		}
+		while (sts->na && sts->ra[0] != min_r(sts->ra, sts->na))
+		{
+			if (pos_r(sts->ra, sts->na, min_r(sts->ra, sts->na)) <= sts->na / 2)
+				{ft_rotate(sts, -1, print * ++steps, "ra\n"); flag = 1;}
+			else
+				{ft_rev_rotate(sts, sts->na, print * ++steps, "rra\n"); flag = 1;}
+		}
+		return (steps);
+		/*
 		if (lower_rank >= upper_rank || sts->rb[0] == lower_rank || sts->rb[0] == upper_rank)
 		{
 			ft_push(0, sts, print * ++steps, "pa\n");
@@ -158,7 +214,7 @@ int	move_from_b2a(t_stac *sts, int steps, int print)
 		else if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) > sts->nb / 2)
 			{ft_rev_rotate(sts, sts->nb, print * ++steps, "rrb\n"); flag = 1;}
 		if (!flag)
-			return 0;
+			return 0;*/
 		/*
 		if (sts->nb && get_pos_of_rank(sts->rb, sts->nb, upper_rank) < sts->nb && sts->na && sts->ra[0] == lower_rank && lower_rank < upper_rank)
 			ft_rr(sts, print * ++steps, "rr\n");
@@ -222,8 +278,6 @@ int	move_from_b2a(t_stac *sts, int steps, int print)
 				ft_rev_rotate(sts, sts->nb, print * ++steps, "rrb\n"); 
 		}
 		*/
-	}
-	return (steps);
 }
 		/*
 		if (pos_of_upper_rank < sts->nb / 2)

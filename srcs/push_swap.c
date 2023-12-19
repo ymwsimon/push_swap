@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/18 12:45:32 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/19 19:20:23 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	search_chuck_size(t_stac sts, double *m)
 
 	i = sts.n;
 	min_steps = INT_MAX;
-	while (i <= sts.n * 4.0)
+	while (i <= sts.n * 3)
 	{
 		sts_cpy = cpy_stack(sts);
 		steps = chunk_solve(&sts_cpy, i, 0);
@@ -55,7 +55,7 @@ void	search_chuck_size(t_stac sts, double *m)
 			*m = i;
 		}
 		ft_destroy(&sts_cpy);
-		i += 0.07;
+		i += 0.11;
 	}
 }
 
