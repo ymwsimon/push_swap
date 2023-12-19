@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/19 19:20:23 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/19 22:31:33 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ int	main(int arc, char **arv)
 	if (arc - 1 > 30)
 	{	
 		search_chuck_size(sts, &m);
-		//printf("\n m:%f steps:%d\n", m, chunk_solve(&sts, m, 0));
 		chunk_solve(&sts, m, 1);
 	}
 	else
