@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:29 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/14 15:45:40 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/20 15:58:04 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 
 # include <push_swap.h>
 # include <fcntl.h>
-# include <libft.h>
 # include <stdio.h>
+
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
+char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif

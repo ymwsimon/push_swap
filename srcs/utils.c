@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:51:53 by mayeung           #+#    #+#             */
-/*   Updated: 2023/10/07 13:48:22 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/20 14:57:31 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,27 @@
 
 void	ft_putstr_fd(char *str, int fd)
 {
-	if (!str)
-		return ;
-	while (*str)
-	{
-		write(fd, str, 1);
-		str++;
-	}
+	int	len;
+
+	len = 0;
+	while (str && str[len])
+		len++;
+	if (str)
+		write(fd, str, len);
 }
 
-char	*ft_trim(char *str)
+char	*next_non_space(char *str)
 {
 	while (str && *str == ' ')
 		str++;
 	return (str);
 }
 
-int	ft_parse_num(char *str, int *res, int sign)
+int	parse_validate_num(char *str, int *res, int sign)
 {
 	if (str && *str && res)
 	{
-		str = ft_trim(str);
+		str = next_non_space(str);
 		if (!*str)
 			return (0);
 		if (*str == '-' || *str == '+')
@@ -52,13 +52,13 @@ int	ft_parse_num(char *str, int *res, int sign)
 			*res += sign * (*str - '0');
 			str++;
 		}
-		str = ft_trim(str);
+		str = next_non_space(str);
 		return (!*str);
 	}
 	return (0);
 }
 
-int	ft_unique(t_stac *sts)
+int	all_unique(t_stac *sts)
 {
 	int	i;
 	int	sum;
@@ -73,7 +73,7 @@ int	ft_unique(t_stac *sts)
 	return (sum == (sts->na - 1) * sts->na / 2);
 }
 
-int	ft_sorted(int n, int *rank)
+int	all_sorted(int n, int *rank)
 {
 	int	i;
 

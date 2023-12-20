@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:54:51 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/14 16:08:45 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/20 14:58:39 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ void	ft_rr(t_stac *sts, int print, char *op)
 {
 	if (print)
 		ft_putstr_fd(op, STDOUT_FILENO);
-	ft_rotate(sts, -1, 0, "ra\n");
-	ft_rotate(sts, -1, 0, "rb\n");
+	ft_rotate(sts, -1, NO_PRINT, "ra\n");
+	ft_rotate(sts, -1, NO_PRINT, "rb\n");
 }
 
 void	ft_rev_rotate(t_stac *sts, int i, int print, char *op)
@@ -82,6 +82,6 @@ void	ft_rrr(t_stac *sts, int print, char *op)
 {
 	if (print)
 		ft_putstr_fd(op, STDOUT_FILENO);
-	ft_rev_rotate(sts, sts->na - 1, 0, "rra\n");
-	ft_rev_rotate(sts, sts->nb - 1, 0, "rrb\n");
+	ft_rev_rotate(sts, sts->na, NO_PRINT, "rra\n");
+	ft_rev_rotate(sts, sts->nb, NO_PRINT, "rrb\n");
 }

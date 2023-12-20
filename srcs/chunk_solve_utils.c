@@ -1,46 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rank.c                                             :+:      :+:    :+:   */
+/*   chunk_solve_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/06 15:57:53 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/20 15:36:53 by mayeung          ###   ########.fr       */
+/*   Created: 2023/12/20 15:53:46 by mayeung           #+#    #+#             */
+/*   Updated: 2023/12/20 15:53:50 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	ft_get_rank(int n, int *st, int *rank)
+int	min_r(int *r, int n)
 {
 	int	i;
-	int	j;
+	int	res;
 
-	i = 0;
-	while (i < n)
+	if (!n || !r)
+		return (-1);
+	res = r[0];
+	i = 1;
+	while (r && i < n)
 	{
-		rank[i] = 0;
-		j = 0;
-		while (j < i)
-		{
-			if (st[j] < st[i])
-				rank[i]++;
-			j++;
-		}
-		j = n - 1;
-		while (j > i)
-		{
-			if (st[j] < st[i])
-				rank[i]++;
-			j--;
-		}
+		if (r[i] < res)
+			res = r[i];
 		i++;
 	}
+	return (res);
 }
 
-void	ft_get_rankab(t_stac *sts)
+int	max_r(int *r, int n)
 {
-	ft_get_rank(sts->na, sts->sa, sts->ra);
-	ft_get_rank(sts->nb, sts->sb, sts->rb);
+	int	i;
+	int	res;
+
+	res = r[0];
+	i = 1;
+	while (r && i < n)
+	{
+		if (r[i] > res)
+			res = r[i];
+		i++;
+	}
+	return (res);
+}
+
+int	pos_r(int *r, int n, int rank)
+{
+	int	i;
+
+	i = 0;
+	while (i < n && r && r[i] != rank)
+		i++;
+	if (i == n)
+		return (-1);
+	return (i);
 }

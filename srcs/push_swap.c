@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/19 22:31:33 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/20 15:00:27 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void	search_chuck_size(t_stac sts, double *m)
 	while (i <= sts.n * 3)
 	{
 		sts_cpy = cpy_stack(sts);
-		steps = chunk_solve(&sts_cpy, i, 0);
+		steps = chunk_solve(&sts_cpy, i, NO_PRINT);
 		if (steps < min_steps)
 		{
 			min_steps = steps;
 			*m = i;
 		}
 		ft_destroy(&sts_cpy);
-		i += 0.11;
+		i += 0.7;
 	}
 }
 
@@ -66,16 +66,16 @@ int	main(int arc, char **arv)
 
 	if (arc == 1)
 		return (0);
-	if (!ft_init(arc, arv, &sts, 0) || !ft_unique(&sts))
+	if (!ft_init(arc, arv, &sts, 0) || !all_unique(&sts))
 	{
 		ft_destroy(&sts);
-		ft_putstr_fd("Error\n", 2);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);
 	}
 	if (arc - 1 > 30)
-	{	
+	{
 		search_chuck_size(sts, &m);
-		chunk_solve(&sts, m, 1);
+		chunk_solve(&sts, m, PRINT);
 	}
 	else
 		ft_small_solve(&sts);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   small_solve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:56:42 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/14 16:07:21 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/20 15:02:59 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,39 @@
 
 void	ft_ssolve_1step(t_stac *s)
 {
-	while (!ft_sorted(s->na, s->ra))
+	while (!all_sorted(s->na, s->ra))
 	{
 		if (s->nb > 1 && s->ra[0] == s->na - 1 && s->rb[0] < s->nb / 2)
-			ft_rr(s, 1, "rr\n");
-		else if (s->nb > 1 && s->ra[s->na - 1] == 0 && \
-				s->rb[s->nb - 1] > s->nb / 2)
-			ft_rrr(s, 1, "rrr\n");
-		else if ((s->na > 1 && s->ra[0] > s->ra[1]) && \
-				(s->nb > 1 && s->rb[0] < s->rb[1]))
-			ft_ss(s, 1, "ss\n");
+			ft_rr(s, PRINT, "rr\n");
+		else if (s->nb > 1 && s->ra[s->na - 1] == 0
+			&& s->rb[s->nb - 1] > s->nb / 2)
+			ft_rrr(s, PRINT, "rrr\n");
+		else if ((s->na > 1 && s->ra[0] > s->ra[1])
+			&& (s->nb > 1 && s->rb[0] < s->rb[1]))
+			ft_ss(s, PRINT, "ss\n");
 		else if (s->na > 1 && s->ra[0] == s->na - 1)
-			ft_rotate(s, -1, 1, "ra\n");
+			ft_rotate(s, -1, PRINT, "ra\n");
 		else if (s->nb > 1 && s->rb[0] == 0)
-			ft_rotate(s, -1, 1, "rb\n");
+			ft_rotate(s, -1, PRINT, "rb\n");
 		else if (s->na > 1 && s->ra[s->na - 1] == 0)
-			ft_rev_rotate(s, s->na, 1, "rra\n");
+			ft_rev_rotate(s, s->na, PRINT, "rra\n");
 		else if (s->nb > 1 && s->rb[s->nb - 1] == s->nb - 1)
-			ft_rev_rotate(s, s->nb, 1, "rrb\n");
+			ft_rev_rotate(s, s->nb, PRINT, "rrb\n");
 		else if (s->na > 1 && s->ra[0] > s->ra[1])
-			ft_swap(s, 1, "sa\n");
+			ft_swap(s, PRINT, "sa\n");
 		else if (s->nb > 1 && s->rb[0] < s->rb[1])
-			ft_swap(s, 1, "sb\n");
+			ft_swap(s, PRINT, "sb\n");
 		else if (s->na > 0)
-			ft_push(1, s, 1, "pb\n");
+			ft_push(UPDATE_RANK, s, PRINT, "pb\n");
 	}
 }
 
 void	ft_get_new_rank(t_stac *sts, int *v, int *nr)
 {
 	*v = sts->sb[0];
-	ft_push(1, sts, 0, "pa\n");
+	ft_push(UPDATE_RANK, sts, NO_PRINT, "pa\n");
 	*nr = sts->ra[0];
-	ft_push(1, sts, 0, "pb\n");
+	ft_push(UPDATE_RANK, sts, NO_PRINT, "pb\n");
 }
 
 void	ft_ssolve_2step(t_stac *sts, int v, int nr)
@@ -58,32 +58,32 @@ void	ft_ssolve_2step(t_stac *sts, int v, int nr)
 		{
 			if (sts->ra[0] > sts->na / 2)
 				while (sts->ra[0] != 0)
-					ft_rotate(sts, -1, 1, "ra\n");
+					ft_rotate(sts, -1, PRINT, "ra\n");
 			else
 				while (sts->ra[0] != 0)
-					ft_rev_rotate(sts, sts->na, 1, "rra\n");
+					ft_rev_rotate(sts, sts->na, PRINT, "rra\n");
 		}
 		else
 		{
 			if (sts->ra[0] < nr || nr < sts->ra[0] - sts->na / 2)
 				while (!(v < sts->sa[0] && v > sts->sa[sts->na - 1]))
-					ft_rotate(sts, -1, 1, "ra\n");
+					ft_rotate(sts, -1, PRINT, "ra\n");
 			else
 				while (!(v < sts->sa[0] && v > sts->sa[sts->na - 1]))
-					ft_rev_rotate(sts, sts->na, 1, "rra\n");
+					ft_rev_rotate(sts, sts->na, PRINT, "rra\n");
 		}
-		ft_push(1, sts, 1, "pa\n");
+		ft_push(UPDATE_RANK, sts, PRINT, "pa\n");
 	}
 }
 
 void	ft_ssolve_3step(t_stac *sts)
 {
-	while (!ft_sorted(sts->na, sts->ra))
+	while (!all_sorted(sts->na, sts->ra))
 	{
 		if (sts->ra[0] > sts->na / 2)
-			ft_rotate(sts, -1, 1, "ra\n");
+			ft_rotate(sts, -1, PRINT, "ra\n");
 		else
-			ft_rev_rotate(sts, sts->na, 1, "rra\n");
+			ft_rev_rotate(sts, sts->na, PRINT, "rra\n");
 	}
 }
 
