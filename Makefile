@@ -2,11 +2,13 @@ NAME = push_swap
 
 OBJS = $(SRCS_SHARE:=.o)
 
-BONUS = checker 
+BONUS = checker
 
-OBJS_B = $(BONUS:=.o)
+BONUS_SRCS = checker checker_utils
 
-SRCS_SHARE = init_des push rank rotate small_solve solve chunk_solve swap utils
+OBJS_B = $(BONUS_SRCS:=.o)
+
+SRCS_SHARE = init_des push rank rotate small_solve solve chunk_solve swap utils chunk_solve_logic chunk_solve_utils
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -15,10 +17,6 @@ CC = cc
 INC_DIR = ./includes
 
 SRCS_DIR = ./srcs
-
-LIBFT_DIR = ./libft
-
-LIBFT = libft.a
 
 all : $(NAME)
 
@@ -31,22 +29,18 @@ $(OBJS) : $(SRCS_SHARE:%=$(SRCS_DIR)/%.c)
 $(NAME:=.o) : $(NAME:%=$(SRCS_DIR)/%.c) $(SRCS_SHARE:%=$(SRCS_DIR)/%.c)
 	$(CC) $(FLAGS) -c $^ -I$(INC_DIR)
 
-bonus : $(OBJS_B) $(OBJS) $(LIBFT_DIR)/$(LIBFT)
-	$(CC) $(FLAGS) -o $(BONUS) $(OBJS_B) $(OBJS) -I$(INC_DIR) -lft -L$(LIBFT_DIR)
+bonus : $(OBJS_B) $(OBJS)
+	$(CC) $(FLAGS) -o $(BONUS) $(OBJS_B) $(OBJS) -I$(INC_DIR)
 
-$(OBJS_B) : $(BONUS:%=$(SRCS_DIR)/%.c) $(SRCS_SHARE:%=$(SRCS_DIR)/%.c)
-	$(CC) $(FLAGS) -c $^ -I$(INC_DIR) -I$(LIBFT_DIR)
-
-$(LIBFT_DIR)/$(LIBFT) :
-	make -C $(LIBFT_DIR)
+$(OBJS_B) : $(BONUS_SRCS:%=$(SRCS_DIR)/%.c) $(SRCS_SHARE:%=$(SRCS_DIR)/%.c)
+	$(CC) $(FLAGS) -c $^ -I$(INC_DIR)
 
 clean :
 	rm -rf *.o
 
 fclean : clean
-	make -C $(LIBFT_DIR) fclean
 	rm -rf $(NAME)
-	rm -rf $(NAME_B)
+	rm -rf $(BONUS)
 
 re : clean $(NAME)
 
