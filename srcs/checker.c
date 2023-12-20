@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:42:28 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/20 15:09:25 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/20 21:11:14 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_get_cmd(char **res)
 	buf[1] = 0;
 	while (read(STDIN_FILENO, buf, 1) == 1)
 	{
-		if (buf[0] != '\n' && buf[0] != EOF)
+		if (buf[0] && buf[0] != '\n')
 		{
 			tmp = *res;
 			*res = ft_strjoin(*res, buf);

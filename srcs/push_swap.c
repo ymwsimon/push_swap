@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/20 15:00:27 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/20 22:45:29 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	search_chuck_size(t_stac sts, double *m)
 	int			steps;
 	int			min_steps;
 
-	i = sts.n;
+	i = sts.n - 4.0;
 	min_steps = INT_MAX;
-	while (i <= sts.n * 3)
+	while (i <= sts.n * 3.0)
 	{
 		sts_cpy = cpy_stack(sts);
 		steps = chunk_solve(&sts_cpy, i, NO_PRINT);
