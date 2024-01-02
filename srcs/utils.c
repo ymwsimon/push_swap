@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:51:53 by mayeung           #+#    #+#             */
-/*   Updated: 2023/10/07 13:48:22 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/02 19:51:35 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,25 @@ char	*ft_trim(char *str)
 	return (str);
 }
 
-int	ft_parse_num(char *str, int *res, int sign)
+int	ft_parse_num(char *str, int *r, int sign)
 {
-	if (str && *str && res)
+	if (str && *str && r)
 	{
 		str = ft_trim(str);
-		if (!*str)
-			return (0);
 		if (*str == '-' || *str == '+')
 			if (*str++ == '-')
 				sign = -1;
+		if (!*str)
+			return (0);
 		while (*str && *str >= '0' && *str <= '9')
 		{
-			if ((sign == 1 && (*res) * 10 < 0) || \
-				(sign == -1 && (*res) * 10 > 0))
+			if ((sign == 1 && (*r) * 10 < 0) || (sign == -1 && (*r) * 10 > 0))
 				return (0);
-			*res *= 10;
-			if ((sign == 1 && *res + (*str - '0') < 0) || \
-				(sign == -1 && *res + (*str - '0') * -1 > 0))
+			*r *= 10;
+			if ((sign == 1 && *r + (*str - '0') < 0) || \
+				(sign == -1 && *r + (*str - '0') * -1 > 0))
 				return (0);
-			*res += sign * (*str - '0');
+			*r += sign * (*str - '0');
 			str++;
 		}
 		str = ft_trim(str);
