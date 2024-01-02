@@ -6,66 +6,82 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:54:51 by mayeung           #+#    #+#             */
-/*   Updated: 2023/10/07 17:15:39 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/20 14:58:39 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	ft_rotate(int n, int *st, int *rank, char *op)
+void	ft_rotate(t_stac *sts, int i, int print, char *op)
 {
-	int	tmpst;
-	int	tmpr;
-	int	i;
+	int	tmp;
+	int	n;
+	int	*rank;
+	int	*stack;
 
-	ft_putstr_fd(op, 1);
-	if (n < 2)
-		return ;
-	i = 0;
-	tmpst = st[i];
-	tmpr = rank[i];
-	while (i < n - 1)
+	if (print)
+		ft_putstr_fd(op, STDOUT_FILENO);
+	n = sts->nb;
+	rank = sts->rb;
+	stack = sts->sb;
+	if (op && op[1] == 'a')
 	{
-		st[i] = st[i + 1];
+		n = sts->na;
+		rank = sts->ra;
+		stack = sts->sa;
+	}
+	tmp = rank[0];
+	while (++i < n - 1 && n > 1)
 		rank[i] = rank[i + 1];
-		i++;
-	}
-	st[i] = tmpst;
-	rank[i] = tmpr;
+	rank[i] = tmp;
+	i = -1;
+	tmp = stack[0];
+	while (++i < n - 1 && n > 1)
+		stack[i] = stack[i + 1];
+	stack[i] = tmp;
 }
 
-void	ft_rr(t_stac *s, char *op)
+void	ft_rr(t_stac *sts, int print, char *op)
 {
-	ft_putstr_fd(op, 1);
-	ft_rotate(s->na, s->sa, s->ra, 0);
-	ft_rotate(s->nb, s->sb, s->rb, 0);
+	if (print)
+		ft_putstr_fd(op, STDOUT_FILENO);
+	ft_rotate(sts, -1, NO_PRINT, "ra\n");
+	ft_rotate(sts, -1, NO_PRINT, "rb\n");
 }
 
-void	ft_rev_rotate(int n, int *st, int *rank, char *op)
+void	ft_rev_rotate(t_stac *sts, int i, int print, char *op)
 {
-	int	tmpst;
-	int	tmpr;
-	int	i;
+	int	tmp;
+	int	n;
+	int	*rank;
+	int	*stack;
 
-	ft_putstr_fd(op, 1);
-	if (n < 2)
-		return ;
-	i = n - 1;
-	tmpst = st[i];
-	tmpr = rank[i];
-	while (i)
+	if (print)
+		ft_putstr_fd(op, STDOUT_FILENO);
+	n = sts->nb;
+	rank = sts->rb;
+	stack = sts->sb;
+	if (op && op[2] == 'a')
 	{
-		st[i] = st[i - 1];
-		rank[i] = rank[i - 1];
-		i--;
+		n = sts->na;
+		rank = sts->ra;
+		stack = sts->sa;
 	}
-	st[i] = tmpst;
-	rank[i] = tmpr;
+	tmp = rank[i - 1];
+	while (--i > 0 && n > 1)
+		rank[i] = rank[i - 1];
+	rank[i] = tmp;
+	i = n;
+	tmp = stack[i - 1];
+	while (--i > 0 && n > 1)
+		stack[i] = stack[i - 1];
+	stack[i] = tmp;
 }
 
-void	ft_rrr(t_stac *s, char *op)
+void	ft_rrr(t_stac *sts, int print, char *op)
 {
-	ft_putstr_fd(op, 1);
-	ft_rev_rotate(s->na, s->sa, s->ra, 0);
-	ft_rev_rotate(s->nb, s->sb, s->rb, 0);
+	if (print)
+		ft_putstr_fd(op, STDOUT_FILENO);
+	ft_rev_rotate(sts, sts->na, NO_PRINT, "rra\n");
+	ft_rev_rotate(sts, sts->nb, NO_PRINT, "rrb\n");
 }

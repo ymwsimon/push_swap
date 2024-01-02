@@ -1,16 +1,14 @@
 NAME = push_swap
 
-NAME_MAIN = push_swap
+OBJS = $(SRCS_SHARE:=.o)
 
-SRCS = init_des push rank rotate small_solve solve chunk_solve swap utils
+BONUS = checker
 
-OBJS = $(SRCS:=.o)
+BONUS_SRCS = checker checker_utils
 
-OBJS_MAIN = $(NAME_MAIN:=.o)
+OBJS_B = $(BONUS_SRCS:=.o)
 
-BONUS = checker 
-
-OBJS_B = $(BONUS:=.o)
+SRCS_SHARE = init_des push rank rotate small_solve solve chunk_solve swap utils chunk_solve_logic chunk_solve_utils
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -20,31 +18,22 @@ INC_DIR = ./includes
 
 SRCS_DIR = ./srcs
 
-NAME_B = checker
-
-LIBFT_DIR = ./libft
-
-LIBFT = libft.a
-
 all : $(NAME)
 
-$(NAME) : $(OBJS) $(OBJS_MAIN)
-	$(CC) $(FLAGS) -o $(NAME) $(OBJS) $(OBJS_MAIN) -I$(INC_DIR)
+$(NAME) : $(OBJS) $(NAME:=.o) 
+	$(CC) $(FLAGS) -o $(NAME) $^ -I$(INC_DIR)
 
-$(OBJS) : $(SRCS:%=$(SRCS_DIR)/%.c)
-	$(CC) $(FLAGS) -c $(SRCS:%=$(SRCS_DIR)/%.c) -I$(INC_DIR)
+$(OBJS) : $(SRCS_SHARE:%=$(SRCS_DIR)/%.c)
+	$(CC) $(FLAGS) -c $^ -I$(INC_DIR)
 
-$(OBJS_MAIN) : $(NAME_MAIN:%=$(SRCS_DIR)/%.c)
-	$(CC) $(FLAGS) -c $(NAME_MAIN:%=$(SRCS_DIR)/%.c) -I$(INC_DIR)
+$(NAME:=.o) : $(NAME:%=$(SRCS_DIR)/%.c) $(SRCS_SHARE:%=$(SRCS_DIR)/%.c)
+	$(CC) $(FLAGS) -c $^ -I$(INC_DIR)
 
-bonus : $(OBJS) $(OBJS_B) $(LIBFT_DIR)/$(LIBFT)
-	$(CC) $(FLAGS) -o $(NAME_B) $(OBJS) $(OBJS_B) -I$(INC_DIR) -lft -L$(LIBFT_DIR)
+bonus : $(OBJS_B) $(OBJS)
+	$(CC) $(FLAGS) -o $(BONUS) $(OBJS_B) $(OBJS) -I$(INC_DIR)
 
-$(OBJS_B) : $(BONUS:%=$(SRCS_DIR)/%.c)
-	$(CC) $(FLAGS) -c $(BONUS:%=$(SRCS_DIR)/%.c) -I$(INC_DIR) -I$(LIBFT_DIR)
-
-$(LIBFT_DIR)/$(LIBFT) :
-	make -C $(LIBFT_DIR)
+$(OBJS_B) : $(BONUS_SRCS:%=$(SRCS_DIR)/%.c) $(SRCS_SHARE:%=$(SRCS_DIR)/%.c)
+	$(CC) $(FLAGS) -c $^ -I$(INC_DIR)
 
 clean :
 	rm -rf *.o
@@ -55,4 +44,4 @@ fclean : clean
 
 re : clean $(NAME)
 
-.PHONY : $(NAME) all clean fclean re bonus $(BONUS)
+.PHONY : all clean fclean re bonus

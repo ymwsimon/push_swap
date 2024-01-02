@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:53:26 by mayeung           #+#    #+#             */
-/*   Updated: 2023/10/07 13:48:35 by mayeung          ###   ########.fr       */
+/*   Updated: 2023/12/20 15:00:14 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_init(int arc, char **arv, t_stac *sts, int i)
 	while (i < arc - 1)
 	{
 		sts->sa[i] = 0;
-		if (!ft_parse_num(arv[i + 1], &sts->sa[i], 1))
+		if (!parse_validate_num(arv[i + 1], &sts->sa[i], 1))
 			return (0);
 		i++;
 	}

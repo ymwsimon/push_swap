@@ -56,7 +56,7 @@ def generate():
 	stack_a = list(dict.fromkeys(stack_a))
 	if sys.argv[1] != "-n":
 		push_swap = subprocess.check_output([sys.argv[1]] + [str(i) for i in stack_a], stderr=subprocess.STDOUT,
-							timeout=12).splitlines()
+							timeout=120).splitlines()
 	l.set("instructions count: " + str(len(push_swap)))
 	stack_b = []
 	ops = 0
