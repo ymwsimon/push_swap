@@ -6,11 +6,11 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:51:53 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/02 20:00:28 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/03 01:05:35 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include "../includes/push_swap.h"
 
 void	ft_putstr_fd(char *str, int fd)
 {
@@ -38,7 +38,7 @@ int	parse_validate_num(char *str, int *r, int sign)
 		if (*str == '-' || *str == '+')
 			if (*str++ == '-')
 				sign = -1;
-		if (!*str)
+		if (!*str || *str == ' ')
 			return (0);
 		while (*str && *str >= '0' && *str <= '9')
 		{
@@ -46,7 +46,7 @@ int	parse_validate_num(char *str, int *r, int sign)
 				return (0);
 			*r *= 10;
 			if ((sign == 1 && *r + (*str - '0') < 0) || \
-				(sign == -1 && *r + (*str - '0') * -1 > 0))
+				(sign == -1 && *r - (*str - '0') > 0))
 				return (0);
 			*r += sign * (*str - '0');
 			str++;

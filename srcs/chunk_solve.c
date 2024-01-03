@@ -6,11 +6,11 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/20 15:54:22 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/03 01:00:37 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include "../includes/push_swap.h"
 
 int	move_from_a2b_group(t_stac *sts, double m, int steps, int print)
 {

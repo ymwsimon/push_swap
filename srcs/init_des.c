@@ -6,11 +6,11 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:53:26 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/20 15:00:14 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/03 01:01:11 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include "../includes/push_swap.h"
 
 void	ft_destroy(t_stac *sts)
 {

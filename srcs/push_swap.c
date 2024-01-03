@@ -6,13 +6,11 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/20 22:45:29 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/03 01:01:32 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
-#include <stdio.h>
-#include <limits.h>
+#include "../includes/push_swap.h"
 
 t_stac	cpy_stack(t_stac sts)
 {

@@ -6,11 +6,11 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:53:46 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/20 15:53:50 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/03 01:00:28 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include "../includes/push_swap.h"
 
 int	min_r(int *r, int n)
 {

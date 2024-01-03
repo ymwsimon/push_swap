@@ -6,11 +6,11 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:58:20 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/20 14:53:01 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/03 01:02:12 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include "../includes/push_swap.h"
 
 void	ft_proc_st(int digit, int times, char from, t_stac *sts)
 {

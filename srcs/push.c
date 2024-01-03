@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:55:30 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/14 15:12:26 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/03 01:01:40 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include "../includes/push_swap.h"
 
 void	ft_shift_down(int *st, int *rst, int *nst)
 {

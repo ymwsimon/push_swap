@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mayeung <mayeung@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:54:36 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/14 15:42:00 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/03 01:02:19 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include "../includes/push_swap.h"
 
 void	ft_swap(t_stac *sts, int print, char *op)
 {

@@ -6,11 +6,11 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:57:53 by mayeung           #+#    #+#             */
-/*   Updated: 2023/12/20 15:36:53 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/03 01:01:49 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include "../includes/push_swap.h"
 
 void	ft_get_rank(int n, int *st, int *rank)
 {
