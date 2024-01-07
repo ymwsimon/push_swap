@@ -1,42 +1,48 @@
-NAME = push_swap
+NAME := push_swap
 
-OBJS = $(SRCS_SHARE:=.o)
+SRCS_SHARE := init_des push rank rotate small_solve solve chunk_solve swap utils chunk_solve_logic chunk_solve_utils
 
-BONUS = checker
+BONUS := checker
 
-BONUS_SRCS = checker checker_utils
+SRCS_BONUS := checker checker_utils
 
-OBJS_B = $(BONUS_SRCS:=.o)
+FLAGS := -Wall -Wextra -Werror
 
-SRCS_SHARE = init_des push rank rotate small_solve solve chunk_solve swap utils chunk_solve_logic chunk_solve_utils
+CC := cc
 
-FLAGS = -Wall -Wextra -Werror
+INC_DIR := includes
 
-CC = cc
+#HEADER := push_swap.h
 
-INC_DIR = ./includes
+#HEADER_BONUS := push_swap_bonus.h
 
-SRCS_DIR = ./srcs
+SRCS_DIR := srcs
+
+OBJ_DIR := obj
+
+OBJS_MAND := $(NAME:%=$(OBJ_DIR)/%.o)
+
+OBJS_MAND += $(SRCS_SHARE:%=$(OBJ_DIR)/%.o)
+
+OBJS_BONUS := $(SRCS_BONUS:%=$(OBJ_DIR)/%.o)
+
+OBJS_BONUS += $(SRCS_SHARE:%=$(OBJ_DIR)/%.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJS) $(NAME:=.o) 
-	$(CC) $(FLAGS) -o $(NAME) $^ -I$(INC_DIR)
+$(NAME) : $(OBJS_MAND)
+	$(CC) $(FLAGS) $^ -I$(INC_DIR) -o $@
 
-$(OBJS) : $(SRCS_SHARE:%=$(SRCS_DIR)/%.c)
-	$(CC) $(FLAGS) -c $^ -I$(INC_DIR)
+$(OBJ_DIR)/%.o : $(SRCS_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(FLAGS) -c $^ -I$(INC_DIR) -o $@
 
-$(NAME:=.o) : $(NAME:%=$(SRCS_DIR)/%.c) $(SRCS_SHARE:%=$(SRCS_DIR)/%.c)
-	$(CC) $(FLAGS) -c $^ -I$(INC_DIR)
-
-bonus : $(OBJS_B) $(OBJS)
-	$(CC) $(FLAGS) -o $(BONUS) $(OBJS_B) $(OBJS) -I$(INC_DIR)
-
-$(OBJS_B) : $(BONUS_SRCS:%=$(SRCS_DIR)/%.c) $(SRCS_SHARE:%=$(SRCS_DIR)/%.c)
-	$(CC) $(FLAGS) -c $^ -I$(INC_DIR)
+bonus : $(OBJS_BONUS)
+	$(CC) $(FLAGS) $^ -I$(INC_DIR) -o $(BONUS)
 
 clean :
 	rm -rf *.o
+	rm -rf $(OBJ_DIR)
 
 fclean : clean
 	rm -rf $(NAME)
