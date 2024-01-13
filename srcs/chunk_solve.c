@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/03 01:00:37 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/13 17:16:57 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,30 @@ int	chunk_solve(t_stac *sts, double m, int print)
 	steps += move_from_b2a(sts, 0, sts->nb, print);
 	steps += rotate_min_to_top(sts, print);
 	return (steps);
+}
+
+double	search_chunk_size(t_stac sts)
+{
+	t_stac		sts_cpy;
+	double		i;
+	double		m;
+	int			steps;
+	int			min_steps;
+
+	i = sts.n - 4.0;
+	m = 1;
+	min_steps = INT_MAX;
+	while (i <= sts.n * 3.0)
+	{
+		sts_cpy = cpy_stack(sts);
+		steps = chunk_solve(&sts_cpy, i, NO_PRINT);
+		if (steps < min_steps)
+		{
+			min_steps = steps;
+			m = i;
+		}
+		ft_destroy(&sts_cpy);
+		i += 0.7;
+	}
+	return (m);
 }

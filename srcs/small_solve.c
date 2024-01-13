@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:56:42 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/03 01:02:05 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/13 16:06:19 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	ft_ssolve_1step(t_stac *s)
 {
 	while (!all_sorted(s->na, s->ra))
 	{
-		if (s->nb > 1 && s->ra[0] == s->na - 1 && s->rb[0] < s->nb / 2)
+		if (s->na > 1 && s->ra[0] == s->na - 1 && s->nb > 1 && s->rb[0] == 0)
 			ft_rr(s, PRINT, "rr\n");
 		else if (s->nb > 1 && s->ra[s->na - 1] == 0
-			&& s->rb[s->nb - 1] > s->nb / 2)
+			&& s->nb > 1 && s->rb[s->nb - 1] == s->nb - 1)
 			ft_rrr(s, PRINT, "rrr\n");
 		else if ((s->na > 1 && s->ra[0] > s->ra[1])
 			&& (s->nb > 1 && s->rb[0] < s->rb[1]))

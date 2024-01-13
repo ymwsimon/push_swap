@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:53:46 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/03 01:00:28 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/13 17:09:20 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,26 @@ int	pos_r(int *r, int n, int rank)
 	if (i == n)
 		return (-1);
 	return (i);
+}
+
+t_stac	cpy_stack(t_stac sts)
+{
+	t_stac	res;
+	int		i;
+
+	res.ra = malloc(sizeof(int) * sts.na);
+	res.rb = malloc(sizeof(int) * sts.na);
+	res.sa = malloc(sizeof(int) * sts.na);
+	res.sb = malloc(sizeof(int) * sts.na);
+	res.n = sts.n;
+	res.na = sts.na;
+	res.nb = sts.nb;
+	i = 0;
+	while (i < res.na)
+	{
+		res.ra[i] = sts.ra[i];
+		res.sa[i] = sts.sa[i];
+		i++;
+	}
+	return (res);
 }

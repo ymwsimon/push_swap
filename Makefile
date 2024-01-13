@@ -1,6 +1,6 @@
 NAME := push_swap
 
-SRCS_SHARE := init_des push rank rotate small_solve solve chunk_solve swap utils chunk_solve_logic chunk_solve_utils
+SRCS_SHARE := init_des push rank rotate small_solve chunk_solve swap utils chunk_solve_logic chunk_solve_utils
 
 BONUS := checker
 
@@ -11,10 +11,6 @@ FLAGS := -Wall -Wextra -Werror
 CC := cc
 
 INC_DIR := includes
-
-#HEADER := push_swap.h
-
-#HEADER_BONUS := push_swap_bonus.h
 
 SRCS_DIR := srcs
 

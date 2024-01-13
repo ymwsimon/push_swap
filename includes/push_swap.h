@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:29 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/03 01:10:05 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/13 17:16:38 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,9 @@ int		can_pa(t_stac *s, int lrank);
 int		need_rra(t_stac *s, int lrank);
 
 int		need_rrb(t_stac *s);
+
+double	search_chunk_size(t_stac sts);
+
+t_stac	cpy_stack(t_stac sts);
 
 #endif
