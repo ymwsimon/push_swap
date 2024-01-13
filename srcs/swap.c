@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:54:36 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/03 01:02:19 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/13 17:30:37 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ void	ft_ss(t_stac *s, int print, char *op)
 {
 	if (print)
 		ft_putstr_fd(op, STDOUT_FILENO);
-	ft_swap(s, 0, "sa\n");
-	ft_swap(s, 0, "sb\n");
+	ft_swap(s, NO_PRINT, "sa\n");
+	ft_swap(s, NO_PRINT, "sb\n");
 }
