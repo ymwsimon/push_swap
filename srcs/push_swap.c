@@ -6,11 +6,32 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/13 17:17:33 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/16 21:22:16 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+#include <stdio.h>
+void	print_sts(t_stac *sts)
+{
+	int	i;
+
+	i = 0;
+	while (i < sts->na)
+	{
+		printf("%d\n", sts->ra[i]);
+		i++;
+	}
+	printf("--------------------------------------------------------------------\n");
+	i = 0;
+	while (i < sts->nb)
+	{
+		printf("%d\n", sts->rb[i]);
+		i++;
+	}
+
+}
 
 int	main(int arc, char **arv)
 {
@@ -25,7 +46,11 @@ int	main(int arc, char **arv)
 		return (1);
 	}
 	if (arc - 1 > 30)
-		chunk_solve(&sts, search_chunk_size(sts), PRINT);
+		//chunk_solve(&sts, search_chunk_size(sts), PRINT);
+	{
+		quicksort(&sts, 0, sts.na - 1, 'a');
+		print_sts(&sts);
+	}
 	else
 		ft_small_solve(&sts);
 	ft_destroy(&sts);

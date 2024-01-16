@@ -1,6 +1,6 @@
 NAME := push_swap
 
-SRCS_SHARE := init_des push rank rotate small_solve chunk_solve swap utils chunk_solve_logic chunk_solve_utils
+SRCS_SHARE := init_des push rank rotate small_solve chunk_solve swap utils chunk_solve_logic chunk_solve_utils quicksort
 
 BONUS := checker
 
