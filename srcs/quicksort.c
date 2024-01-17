@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:36:39 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/16 20:22:04 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/17 12:56:12 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,44 @@
 
 void    quicksort(t_stac *sts, int low, int high, char from)
 {
-	int  med;
-	int  i;
-	int  rotate;
+	int	med;
+	int	i;
+	int	rotate;
 
-	med = (low + high) / 2;
+	med = (low + high + 1) / 2;
 	i = low;
 	rotate = 0;
-	if (low >= high)// && from == 'a')
+	if (low >= high)
 		return ;
-	while (i <= high)
+	while (i <= high && (high - low > 0 || from == 'b'))
 	{
-		if (from == 'a' && sts->na > 0)
+		if (from == 'a' && sts->na && sts->ra[0] < med)
 			ft_push(NO_UPDATE_RANK, sts, PRINT, "pb\n");
-		else if (from == 'b' && sts->nb > 0)
+		else if (from == 'a' && sts->na && sts->ra[0] >= med)
+			ft_rotate(sts, -1, PRINT * ++rotate, "ra\n");
+		else if (from == 'b' && sts->nb && sts->rb[0] >= med)
 			ft_push(NO_UPDATE_RANK, sts, PRINT, "pa\n");
-		if (from == 'a' && sts->nb && sts->rb[0] > med)
-		{    
-			ft_rotate(sts, -1, PRINT, "rb\n");
-			rotate++;
-		}
-		else if (from == 'b' && sts->na && sts->ra[0] <= med)
-		{
-			ft_rotate(sts, -1, PRINT, "ra\n");
-			rotate++;
-		}
+		else if (from == 'b' && sts->nb && sts->rb[0] < med)
+			ft_rotate(sts, -1, PRINT * ++rotate, "rb\n");
 		i++;
 	}
+	if (high - low == 1 && sts->na > 1 && sts->ra[0] > sts->ra[1])
+		ft_swap(sts, PRINT, "sa\n");
 	while (rotate--)
 	{
 		if (from == 'a')
-			ft_rev_rotate(sts, sts->nb, PRINT, "rrb\n");
-		else
 			ft_rev_rotate(sts, sts->na, PRINT, "rra\n");
+		else
+			ft_rev_rotate(sts, sts->nb, PRINT, "rrb\n");
 	}
 	if (from == 'a')
-	{
-		quicksort(sts, med + 1, high, 'b');
-		quicksort(sts, low, med, 'b');
+	{	
+		quicksort(sts, med, high, 'a');
+		quicksort(sts, low, med - 1, 'b');
 	}
 	else
 	{
-		quicksort(sts, low, med, 'a');
-		quicksort(sts, med + 1, high, 'a');
+		quicksort(sts, low, med - 1, 'b');
+		quicksort(sts, med, high, 'a');
 	}
 }

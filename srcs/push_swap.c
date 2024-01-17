@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/16 21:22:16 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/17 12:38:09 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int arc, char **arv)
 		//chunk_solve(&sts, search_chunk_size(sts), PRINT);
 	{
 		quicksort(&sts, 0, sts.na - 1, 'a');
-		print_sts(&sts);
+		//print_sts(&sts);
 	}
 	else
 		ft_small_solve(&sts);
