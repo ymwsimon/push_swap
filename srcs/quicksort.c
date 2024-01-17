@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:36:39 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/17 22:53:05 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/17 23:00:41 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,25 @@ void    quicksort(t_stac *sts, int low, int high, char from)
 	while (i <= high && push <= (high - low) / 2 && (high - low > 1 || from == 'b'))
 	{
 		if (from == 'a' && sts->ra[0] < med)
-			ft_push(NO_UPDATE_RANK, sts, PRINT * ++push, "pb\n");
+		{
+			ft_push(NO_UPDATE_RANK, sts, PRINT, "pb\n");
+			push++;
+		}
 		else if (from == 'a' && sts->ra[0] >= med)
-			ft_rotate(sts, -1, PRINT * ++rotate, "ra\n");
+		{
+			ft_rotate(sts, -1, PRINT, "ra\n");
+			rotate++;
+		}
 		else if (from == 'b' && sts->rb[0] >= med)
-			ft_push(NO_UPDATE_RANK, sts, PRINT * ++push, "pa\n");
+		{
+			ft_push(NO_UPDATE_RANK, sts, PRINT, "pa\n");
+			push++;
+		}
 		else if (from == 'b' && sts->rb[0] < med)
-			ft_rotate(sts, -1, PRINT * ++rotate, "rb\n");
+		{
+			ft_rotate(sts, -1, PRINT, "rb\n");
+			rotate++;
+		}
 		i++;
 	}
 	if (high - low == 1  && sts->ra[0] > sts->ra[1])
