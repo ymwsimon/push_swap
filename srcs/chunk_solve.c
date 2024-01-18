@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/10 19:15:01 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/13 17:16:57 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/18 19:35:10 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ double	search_chunk_size(t_stac sts)
 			min_steps = steps;
 			m = i;
 		}
-		ft_destroy(&sts_cpy);
+		ft_destroy(&sts_cpy, NULL);
 		i += 0.7;
 	}
 	return (m);

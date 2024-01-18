@@ -6,20 +6,33 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:53:26 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/03 01:01:11 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/18 19:31:16 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ft_destroy(t_stac *sts)
+void	ft_destroy(t_stac *sts, char **arr)
 {
-	if (!sts)
-		return ;
-	free(sts->sa);
-	free(sts->sb);
-	free(sts->ra);
-	free(sts->rb);
+	int	i;
+
+	if (sts)
+	{
+		free(sts->sa);
+		free(sts->sb);
+		free(sts->ra);
+		free(sts->rb);
+	}
+	i = 0;
+	if (arr)
+	{
+		while (arr[i])
+		{
+			free(arr[i]);
+			i++;
+		}
+		free(arr);
+	}
 }
 
 int	ft_init(int arc, char **arv, t_stac *sts, int i)
@@ -28,9 +41,9 @@ int	ft_init(int arc, char **arv, t_stac *sts, int i)
 	sts->sb = malloc(sizeof(int) * (arc - 1));
 	sts->ra = malloc(sizeof(int) * (arc - 1));
 	sts->rb = malloc(sizeof(int) * (arc - 1));
-	sts->na = arc - 1;
+	sts->na = arc;
 	sts->nb = 0;
-	sts->n = arc - 2;
+	sts->n = arc - 1;
 	while (sts->n)
 	{
 		i++;
@@ -38,10 +51,10 @@ int	ft_init(int arc, char **arv, t_stac *sts, int i)
 	}
 	sts->n = i;
 	i = 0;
-	while (i < arc - 1)
+	while (i < arc)
 	{
 		sts->sa[i] = 0;
-		if (!parse_validate_num(arv[i + 1], &sts->sa[i], 1))
+		if (!parse_validate_num(arv[i], &sts->sa[i], 1))
 			return (0);
 		i++;
 	}

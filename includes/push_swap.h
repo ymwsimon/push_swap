@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:29 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/13 17:16:38 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/18 19:41:08 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*next_non_space(char *str);
 
 int		parse_validate_num(char *str, int *res, int sign);
 
-void	ft_destroy(t_stac *sts);
+void	ft_destroy(t_stac *sts, char **arr);
 
 int		ft_init(int arc, char **arv, t_stac *sts, int i);
 
@@ -104,5 +104,13 @@ int		need_rrb(t_stac *s);
 double	search_chunk_size(t_stac sts);
 
 t_stac	cpy_stack(t_stac sts);
+
+char	**ft_split(char const *s, char c);
+
+char	**ft_flatten_str_arr(char ***arr, int size);
+
+int 	ft_arr_size(char **arr);
+
+char	***ft_split_arr(int arc, char **arv);
 
 #endif
