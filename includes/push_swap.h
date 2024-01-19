@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:29 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/18 19:41:08 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/19 15:04:27 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,12 @@ char	**ft_split(char const *s, char c);
 
 char	**ft_flatten_str_arr(char ***arr, int size);
 
-int 	ft_arr_size(char **arr);
+int		ft_arr_size(char **arr);
 
 char	***ft_split_arr(int arc, char **arv);
+
+char	**ft_clean_up_split(size_t k, char **arr);
+
+char	**ft_clean_up_split_arr(int k, char ***arr, int print);
 
 #endif

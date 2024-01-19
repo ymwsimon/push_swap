@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 18:42:28 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/03 01:00:09 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/19 15:03:05 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_exe_cmd(char *cmd, t_stac *sts)
 		ft_rev_rotate(sts, sts->nb, NO_PRINT, "rrb\n");
 }
 
-void	ft_proc(t_stac *sts)
+void	ft_proc(t_stac *sts, char **inputs)
 {
 	char	*cmd;
 
@@ -84,7 +84,7 @@ void	ft_proc(t_stac *sts)
 		{
 			ft_putstr_fd("Error\n", STDERR_FILENO);
 			free(cmd);
-			ft_destroy(sts);
+			ft_destroy(sts, inputs);
 			exit(1);
 		}
 		free(cmd);
@@ -99,16 +99,24 @@ void	ft_proc(t_stac *sts)
 int	main(int arc, char **arv)
 {
 	t_stac	sts;
+	char	***arr;
+	char	**inputs;
 
 	if (arc == 1)
 		return (0);
-	if (!ft_init(arc, arv, &sts, 0) || !all_unique(&sts))
+	arr = ft_split_arr(arc, arv);
+	if (!arr)
+		return (1);
+	inputs = ft_flatten_str_arr(arr, arc - 1);
+	if (!inputs)
+		return (1);
+	if (!ft_init(ft_arr_size(inputs), inputs, &sts, 0) || !all_unique(&sts))
 	{
-		ft_destroy(&sts);
+		ft_destroy(&sts, inputs);
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);
 	}
-	ft_proc(&sts);
-	ft_destroy(&sts);
+	ft_proc(&sts, inputs);
+	ft_destroy(&sts, inputs);
 	return (0);
 }

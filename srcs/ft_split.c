@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 20:55:24 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/18 18:40:29 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/19 14:34:01 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static size_t	ft_word_length(const char *s, char c)
 	return (i);
 }
 
-static char	**ft_clean_up(size_t k, char **arr)
+char	**ft_clean_up_split(size_t k, char **arr)
 {
 	size_t	i;
 
@@ -70,7 +70,7 @@ char	**ft_split(char const *s, char c)
 		{
 			res[k] = malloc(sizeof(char) * (ft_word_length(s, c) + 1));
 			if (!res[k])
-				return (ft_clean_up(k, res));
+				return (ft_clean_up_split(k, res));
 			i = -1;
 			while (s[++i] && s[i] != c)
 				res[k][i] = s[i];

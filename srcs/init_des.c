@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:53:26 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/18 19:31:16 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/19 14:56:28 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	ft_destroy(t_stac *sts, char **arr)
 
 int	ft_init(int arc, char **arv, t_stac *sts, int i)
 {
-	sts->sa = malloc(sizeof(int) * (arc - 1));
-	sts->sb = malloc(sizeof(int) * (arc - 1));
-	sts->ra = malloc(sizeof(int) * (arc - 1));
-	sts->rb = malloc(sizeof(int) * (arc - 1));
+	sts->sa = malloc(sizeof(int) * arc);
+	sts->sb = malloc(sizeof(int) * arc);
+	sts->ra = malloc(sizeof(int) * arc);
+	sts->rb = malloc(sizeof(int) * arc);
 	sts->na = arc;
 	sts->nb = 0;
 	sts->n = arc - 1;
