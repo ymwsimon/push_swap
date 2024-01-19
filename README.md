@@ -8,5 +8,4 @@ for i in (seq 1 20); set ARGS (shuf -i 1-5000 -n 500); ./push_swap $ARGS | ./che
 
 for i in (seq 1 20); set ARGS (seq -5000 5000 | shuf -n 500); ./push_swap $ARGS | ./checker_linux $ARGS; end;
 
-for i in (seq 1 5); set ARGS (seq -5000 5000 | shuf -n 3); ./push_swap $ARGS | wc -l; ./push_swap $ARGS | ./checker_linux $ARGS; ech
-o "------"; end;
+for i in (seq 1 5); set ARGS (seq -5000 5000 | shuf -n 3); ./push_swap $ARGS | wc -l; ./push_swap $ARGS | ./checker_linux $ARGS; echo "------"; end;
