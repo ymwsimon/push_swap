@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/19 14:56:52 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/20 15:15:54 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int arc, char **arv)
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);
 	}
-	if (arc - 1 > 30)
+	if (ft_arr_size(inputs) >= 30)
 		chunk_solve(&sts, search_chunk_size(sts), PRINT);
 	else
 		ft_small_solve(&sts);
