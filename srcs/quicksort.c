@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:36:39 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/21 15:10:58 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/21 15:16:09 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,4 @@ void    quicksort(t_stac *sts, int low, int high, char from, int push)
 	quicksort(sts, low, med - 1, 'b', 0);
 }
 
-//quicksort(&sts, 0, sts.na - 1, 'a');
+//quicksort(&sts, 0, sts.na - 1, 'a', 0);
