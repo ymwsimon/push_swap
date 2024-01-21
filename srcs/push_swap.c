@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:44 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/21 15:05:43 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/21 18:54:40 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,18 @@ int	main(int arc, char **arv)
 		//chunk_solve(&sts, search_chunk_size(sts), PRINT);
 	{
 		quicksort(&sts, 0, sts.na - 1, 'a', 0);
+		/*while (sts.nb)
+		{
+			if (pos_r(sts.rb, sts.nb, max_r(sts.rb, sts.nb)) < sts.nb / 2)
+			{
+				while (sts.rb[0] != max_r(sts.rb, sts.nb))
+					ft_rotate(&sts, -1, PRINT, "rb\n");
+			}
+			else
+				while (sts.rb[0] != max_r(sts.rb, sts.nb))
+					ft_rev_rotate(&sts, sts.nb, PRINT, "rrb\n");
+			ft_push(NO_UPDATE_RANK, &sts, PRINT, "pa\n");
+		}*/
 		//print_sts(&sts);
 	}
 	else
