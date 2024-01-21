@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:36:39 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/18 14:03:57 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/21 15:10:58 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,16 @@
 }	t_stac;
 */
 
-void    quicksort(t_stac *sts, int low, int high, char from)
+void    quicksort(t_stac *sts, int low, int high, char from, int push)
 {
 	int	med;
 	int	i;
 	int	rotate;
-	int	push;
+	int	new_push;
 
 	med = (low + high + 1) / 2;
 	i = low;
 	rotate = 0;
-	push = 0;
 	if (low > high || (low == high && from == 'a'))
 		return ;
 	while (i <= high && push <= (high - low) / 2 && (high - low > 1 || from == 'b'))
@@ -61,17 +60,26 @@ void    quicksort(t_stac *sts, int low, int high, char from)
 		}
 		i++;
 	}
-	if (high - low == 1  && sts->ra[0] > sts->ra[1])
+	if (high - low == 1 && sts->ra[0] > sts->ra[1])
 		ft_swap(sts, PRINT, "sa\n");
-	while (rotate-- && !(high == (sts->na + sts->nb - 1)))
+	new_push = 0;
+	while (rotate-- && !(low == 0 || high == (sts->na + sts->nb - 1)))
 	{
+		if (high - med > 0 && from == 'a')
+		{
+			while (sts->ra[0] < (high + med + 1) / 2)
+			{
+				ft_push(NO_UPDATE_RANK, sts, PRINT, "pb\n");
+				new_push++;
+			}
+		}
 		if (from == 'a')
 			ft_rev_rotate(sts, sts->na, PRINT, "rra\n");
 		else
 			ft_rev_rotate(sts, sts->nb, PRINT, "rrb\n");
 	}
-	quicksort(sts, med, high, 'a');
-	quicksort(sts, low, med - 1, 'b');
+	quicksort(sts, med, high, 'a', new_push);
+	quicksort(sts, low, med - 1, 'b', 0);
 }
 
 //quicksort(&sts, 0, sts.na - 1, 'a');
