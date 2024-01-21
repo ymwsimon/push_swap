@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 15:36:39 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/21 15:16:09 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/21 18:13:53 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ void    quicksort(t_stac *sts, int low, int high, char from, int push)
 	rotate = 0;
 	if (low > high || (low == high && from == 'a'))
 		return ;
-	while (i <= high && push <= (high - low) / 2 && (high - low > 1 || from == 'b'))
+	while ((i <= high) && (push <= ((high - low) / 2)) && ((high - low) > 1 || from == 'b'))
 	{
 		if (from == 'a' && sts->ra[0] < med)
 		{
 			ft_push(NO_UPDATE_RANK, sts, PRINT, "pb\n");
 			push++;
 		}
-		else if (from == 'a' && sts->ra[0] >= med)
+		else if (from == 'a' && sts->ra[0] >= med && sts->ra[0] <= high)
 		{
 			ft_rotate(sts, -1, PRINT, "ra\n");
 			rotate++;
