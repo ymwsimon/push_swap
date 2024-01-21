@@ -6,7 +6,7 @@
 /*   By: mayeung <mayeung@student.42london.com>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 15:40:29 by mayeung           #+#    #+#             */
-/*   Updated: 2024/01/16 18:37:37 by mayeung          ###   ########.fr       */
+/*   Updated: 2024/01/21 15:05:36 by mayeung          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ double	search_chunk_size(t_stac sts);
 
 t_stac	cpy_stack(t_stac sts);
 
-void	quicksort(t_stac *sts, int low, int high, char from);
+void	quicksort(t_stac *sts, int low, int high, char from, int push);
 
 #endif
